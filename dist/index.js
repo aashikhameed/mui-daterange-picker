@@ -6320,7 +6320,7 @@ var DateRangePickerWrapper = function (props) {
         }
         toggle();
     };
-    var handleKeyPress = function (event) { var _a; return ((_a = event) === null || _a === void 0 ? void 0 : _a.key) === 'Escape' && handleToggle(); };
+    var handleKeyPress = function (event) { return (event === null || event === void 0 ? void 0 : event.key) === 'Escape' && handleToggle(); };
     var wrapperClasses = classnames(classes.dateRangePicker, wrapperClassName);
     return (React.createElement("div", { className: classes.dateRangePickerContainer },
         open && (React.createElement("div", { className: classes.dateRangeBackdrop, onKeyPress: handleKeyPress, onClick: handleToggle })),
