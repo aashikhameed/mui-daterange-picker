@@ -1,8 +1,7 @@
-import { jsxs, jsx, Fragment } from 'react/jsx-runtime';
-import { StylesProvider } from '@material-ui/core/styles';
-import { makeStyles, Grid, IconButton, Select, MenuItem, Typography, Paper, List, ListItem, ListItemText, Divider } from '@material-ui/core';
 import * as React from 'react';
 import React__default from 'react';
+import { StylesProvider } from '@material-ui/core/styles';
+import { makeStyles, Grid, IconButton, Select, MenuItem, Typography, Paper, List, ListItem, ListItemText, Divider } from '@material-ui/core';
 import utils from '@material-ui/core/utils';
 
 /******************************************************************************
@@ -6032,6 +6031,7 @@ exports.default = _default;
 
 var ChevronRight$1 = unwrapExports(ChevronRight);
 
+/* eslint-disable radix */
 var useStyles$4 = makeStyles(function () { return ({
     iconContainer: {
         padding: 5,
@@ -6072,9 +6072,20 @@ var Header = function (_a) {
     var handleYearChange = function (event) {
         setDate(dateFns_131(date, parseInt(event.target.value)));
     };
-    return (jsxs(Grid, __assign({ container: true, justify: "space-between", alignItems: "center" }, { children: [jsx(Grid, __assign({ item: true, className: classes.iconContainer }, { children: jsx(IconButton, __assign({ className: classes.icon, disabled: prevDisabled, onClick: onClickPrevious }, { children: jsx(ChevronLeft$1, { color: prevDisabled ? 'disabled' : 'action' }) })) })), jsx(Grid, __assign({ item: true }, { children: jsx(Select, __assign({ value: dateFns_63(date), onChange: handleMonthChange, MenuProps: { disablePortal: true } }, { children: MONTHS.map(function (month, idx) { return (jsx(MenuItem, __assign({ value: idx }, { children: month }), month)); }) })) })), jsx(Grid, __assign({ item: true }, { children: jsx(Select, __assign({ value: dateFns_68(date), onChange: handleYearChange, MenuProps: { disablePortal: true } }, { children: generateYears(date, 30).map(function (year) { return (jsx(MenuItem, __assign({ value: year }, { children: year }), year)); }) })) })), jsx(Grid, __assign({ item: true, className: classes.iconContainer }, { children: jsx(IconButton, __assign({ className: classes.icon, disabled: nextDisabled, onClick: onClickNext }, { children: jsx(ChevronRight$1, { color: nextDisabled ? 'disabled' : 'action' }) })) }))] })));
+    return (React__default.createElement(Grid, { container: true, justify: "space-between", alignItems: "center" },
+        React__default.createElement(Grid, { item: true, className: classes.iconContainer },
+            React__default.createElement(IconButton, { className: classes.icon, disabled: prevDisabled, onClick: onClickPrevious },
+                React__default.createElement(ChevronLeft$1, { color: prevDisabled ? 'disabled' : 'action' }))),
+        React__default.createElement(Grid, { item: true },
+            React__default.createElement(Select, { value: dateFns_63(date), onChange: handleMonthChange, MenuProps: { disablePortal: true } }, MONTHS.map(function (month, idx) { return (React__default.createElement(MenuItem, { key: month, value: idx }, month)); }))),
+        React__default.createElement(Grid, { item: true },
+            React__default.createElement(Select, { value: dateFns_68(date), onChange: handleYearChange, MenuProps: { disablePortal: true } }, generateYears(date, 30).map(function (year) { return (React__default.createElement(MenuItem, { key: year, value: year }, year)); }))),
+        React__default.createElement(Grid, { item: true, className: classes.iconContainer },
+            React__default.createElement(IconButton, { className: classes.icon, disabled: nextDisabled, onClick: onClickNext },
+                React__default.createElement(ChevronRight$1, { color: nextDisabled ? 'disabled' : 'action' })))));
 };
 
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
 var useStyles$3 = makeStyles(function (theme) { return ({
     leftBorderRadius: {
         borderRadius: '50% 0 0 50%',
@@ -6113,7 +6124,9 @@ var useStyles$3 = makeStyles(function (theme) { return ({
 var Day = function (_a) {
     var startOfRange = _a.startOfRange, endOfRange = _a.endOfRange, disabled = _a.disabled, highlighted = _a.highlighted, outlined = _a.outlined, filled = _a.filled, onClick = _a.onClick, onHover = _a.onHover, value = _a.value;
     var classes = useStyles$3();
-    return (jsx("div", __assign({ className: combine(classes.buttonContainer, startOfRange && classes.leftBorderRadius, endOfRange && classes.rightBorderRadius, !disabled && highlighted && classes.highlighted) }, { children: jsx(IconButton, __assign({ className: combine(classes.button, !disabled && outlined && classes.outlined, !disabled && filled && classes.filled), disabled: disabled, onClick: onClick, onMouseOver: onHover }, { children: jsx(Typography, __assign({ color: !disabled ? 'textPrimary' : 'textSecondary', className: combine(classes.buttonText, !disabled && filled && classes.contrast), variant: "body2" }, { children: value })) })) })));
+    return (React.createElement("div", { className: combine(classes.buttonContainer, startOfRange && classes.leftBorderRadius, endOfRange && classes.rightBorderRadius, !disabled && highlighted && classes.highlighted) },
+        React.createElement(IconButton, { className: combine(classes.button, !disabled && outlined && classes.outlined, !disabled && filled && classes.filled), disabled: disabled, onClick: onClick, onMouseOver: onHover },
+            React.createElement(Typography, { color: !disabled ? 'textPrimary' : 'textSecondary', className: combine(classes.buttonText, !disabled && filled && classes.contrast), variant: "body2" }, value))));
 };
 
 var NavigationAction;
@@ -6146,16 +6159,20 @@ var Month = function (props) {
     var helpers = props.helpers, handlers = props.handlers, date = props.value, dateRange = props.dateRange, marker = props.marker, setDate = props.setValue, minDate = props.minDate, maxDate = props.maxDate;
     // eslint-disable-next-line react/destructuring-assignment
     var _a = props.navState, back = _a[0], forward = _a[1];
-    return (jsx(Paper, __assign({ square: true, elevation: 0, className: classes.root }, { children: jsxs(Grid, __assign({ container: true }, { children: [jsx(Header, { date: date, setDate: setDate, nextDisabled: !forward, prevDisabled: !back, onClickPrevious: function () { return handlers.onMonthNavigate(marker, NavigationAction.Previous); }, onClickNext: function () { return handlers.onMonthNavigate(marker, NavigationAction.Next); } }), jsx(Grid, __assign({ item: true, container: true, direction: "row", justify: "space-between", className: classes.weekDaysContainer }, { children: WEEK_DAYS.map(function (day) { return (jsx(Typography, __assign({ color: "textSecondary", variant: "caption" }, { children: day }), day)); }) })), jsx(Grid, __assign({ item: true, container: true, direction: "column", justify: "space-between", className: classes.daysContainer }, { children: chunks(getDaysInMonth(date), 7).map(function (week, idx) { return (
-                    // eslint-disable-next-line react/no-array-index-key
-                    jsx(Grid, __assign({ container: true, direction: "row", justify: "center" }, { children: week.map(function (day) {
-                            var isStart = isStartOfRange(dateRange, day);
-                            var isEnd = isEndOfRange(dateRange, day);
-                            var isRangeOneDay = isRangeSameDay(dateRange);
-                            var highlighted = inDateRange(dateRange, day) || helpers.inHoverRange(day);
-                            return (jsx(Day, { filled: isStart || isEnd, outlined: dateFns_102(day), highlighted: highlighted && !isRangeOneDay, disabled: !dateFns_85(date, day)
-                                    || !dateFns_108(day, minDate, maxDate), startOfRange: isStart && !isRangeOneDay, endOfRange: isEnd && !isRangeOneDay, onClick: function () { return handlers.onDayClick(day); }, onHover: function () { return handlers.onDayHover(day); }, value: dateFns_51(day) }, dateFns_50(day, 'MM-DD-YYYY')));
-                        }) }), idx)); }) }))] })) })));
+    return (React.createElement(Paper, { square: true, elevation: 0, className: classes.root },
+        React.createElement(Grid, { container: true },
+            React.createElement(Header, { date: date, setDate: setDate, nextDisabled: !forward, prevDisabled: !back, onClickPrevious: function () { return handlers.onMonthNavigate(marker, NavigationAction.Previous); }, onClickNext: function () { return handlers.onMonthNavigate(marker, NavigationAction.Next); } }),
+            React.createElement(Grid, { item: true, container: true, direction: "row", justify: "space-between", className: classes.weekDaysContainer }, WEEK_DAYS.map(function (day) { return (React.createElement(Typography, { color: "textSecondary", key: day, variant: "caption" }, day)); })),
+            React.createElement(Grid, { item: true, container: true, direction: "column", justify: "space-between", className: classes.daysContainer }, chunks(getDaysInMonth(date), 7).map(function (week, idx) { return (
+            // eslint-disable-next-line react/no-array-index-key
+            React.createElement(Grid, { key: idx, container: true, direction: "row", justify: "center" }, week.map(function (day) {
+                var isStart = isStartOfRange(dateRange, day);
+                var isEnd = isEndOfRange(dateRange, day);
+                var isRangeOneDay = isRangeSameDay(dateRange);
+                var highlighted = inDateRange(dateRange, day) || helpers.inHoverRange(day);
+                return (React.createElement(Day, { key: dateFns_50(day, 'MM-DD-YYYY'), filled: isStart || isEnd, outlined: dateFns_102(day), highlighted: highlighted && !isRangeOneDay, disabled: !dateFns_85(date, day)
+                        || !dateFns_108(day, minDate, maxDate), startOfRange: isStart && !isRangeOneDay, endOfRange: isEnd && !isRangeOneDay, onClick: function () { return handlers.onDayClick(day); }, onHover: function () { return handlers.onDayHover(day); }, value: dateFns_51(day) }));
+            }))); })))));
 };
 
 var isSameRange = function (first, second) {
@@ -6168,16 +6185,17 @@ var isSameRange = function (first, second) {
 };
 var DefinedRanges = function (_a) {
     var ranges = _a.ranges, setRange = _a.setRange, selectedRange = _a.selectedRange;
-    return (jsx(List, { children: ranges.map(function (range, idx) { return (
-        // eslint-disable-next-line react/no-array-index-key
-        jsx(ListItem, __assign({ button: true, onClick: function () { return setRange(range); } }, { children: jsx(ListItemText, __assign({ primaryTypographyProps: {
-                    variant: 'body2',
-                    style: {
-                        fontWeight: isSameRange(range, selectedRange)
-                            ? 'bold'
-                            : 'normal',
-                    },
-                } }, { children: range.label })) }), idx)); }) }));
+    return (React__default.createElement(List, null, ranges.map(function (range, idx) { return (
+    // eslint-disable-next-line react/no-array-index-key
+    React__default.createElement(ListItem, { button: true, key: idx, onClick: function () { return setRange(range); } },
+        React__default.createElement(ListItemText, { primaryTypographyProps: {
+                variant: 'body2',
+                style: {
+                    fontWeight: isSameRange(range, selectedRange)
+                        ? 'bold'
+                        : 'normal',
+                },
+            } }, range.label))); })));
 };
 
 var useStyles$1 = makeStyles(function (theme) { return ({
@@ -6205,11 +6223,30 @@ var Menu = function (props) {
         helpers: helpers,
         handlers: handlers,
     };
-    return (jsx(Paper, __assign({ elevation: 5, square: true }, { children: jsxs(Grid, __assign({ container: true, direction: "row", wrap: "nowrap" }, { children: [jsxs(Grid, { children: [showHeader ? (jsxs(Fragment, { children: [jsxs(Grid, __assign({ container: true, className: classes.header, alignItems: "center" }, { children: [jsx(Grid, __assign({ item: true, className: classes.headerItem }, { children: jsx(Typography, __assign({ variant: "subtitle1" }, { children: startDate
-                                                    ? dateFns_50(startDate, "MMMM DD, YYYY")
-                                                    : "Start Date" })) })), jsx(Grid, __assign({ item: true, className: classes.headerItem }, { children: jsx(ArrowRightAlt$1, { color: "action" }) })), jsx(Grid, __assign({ item: true, className: classes.headerItem }, { children: jsx(Typography, __assign({ variant: "subtitle1" }, { children: endDate ? dateFns_50(endDate, "MMMM DD, YYYY") : "End Date" })) }))] })), jsx(Divider, {})] })) : null, jsxs(Grid, __assign({ container: true, direction: "row", justify: "center", wrap: "nowrap" }, { children: [jsx(Month, __assign({}, commonProps, { value: firstMonth, setValue: setFirstMonth, navState: [true, canNavigateCloser], marker: MARKERS.FIRST_MONTH })), jsx("div", { className: classes.divider }), jsx(Month, __assign({}, commonProps, { value: secondMonth, setValue: setSecondMonth, navState: [canNavigateCloser, true], marker: MARKERS.SECOND_MONTH }))] }))] }), jsx("div", { className: classes.divider }), jsx(Grid, { children: jsx(DefinedRanges, { selectedRange: dateRange, ranges: ranges, setRange: setDateRange }) })] })) })));
+    return (React__default.createElement(Paper, { elevation: 5, square: true },
+        React__default.createElement(Grid, { container: true, direction: "row", wrap: "nowrap" },
+            React__default.createElement(Grid, null,
+                showHeader ? (React__default.createElement(React__default.Fragment, null,
+                    React__default.createElement(Grid, { container: true, className: classes.header, alignItems: "center" },
+                        React__default.createElement(Grid, { item: true, className: classes.headerItem },
+                            React__default.createElement(Typography, { variant: "subtitle1" }, startDate
+                                ? dateFns_50(startDate, "MMMM DD, YYYY")
+                                : "Start Date")),
+                        React__default.createElement(Grid, { item: true, className: classes.headerItem },
+                            React__default.createElement(ArrowRightAlt$1, { color: "action" })),
+                        React__default.createElement(Grid, { item: true, className: classes.headerItem },
+                            React__default.createElement(Typography, { variant: "subtitle1" }, endDate ? dateFns_50(endDate, "MMMM DD, YYYY") : "End Date"))),
+                    React__default.createElement(Divider, null))) : null,
+                React__default.createElement(Grid, { container: true, direction: "row", justify: "center", wrap: "nowrap" },
+                    React__default.createElement(Month, __assign({}, commonProps, { value: firstMonth, setValue: setFirstMonth, navState: [true, canNavigateCloser], marker: MARKERS.FIRST_MONTH })),
+                    React__default.createElement("div", { className: classes.divider }),
+                    React__default.createElement(Month, __assign({}, commonProps, { value: secondMonth, setValue: setSecondMonth, navState: [canNavigateCloser, true], marker: MARKERS.SECOND_MONTH })))),
+            React__default.createElement("div", { className: classes.divider }),
+            React__default.createElement(Grid, null,
+                React__default.createElement(DefinedRanges, { selectedRange: dateRange, ranges: ranges, setRange: setDateRange })))));
 };
 
+/* eslint-disable no-multi-assign */
 var MARKERS = {
     FIRST_MONTH: Symbol('firstMonth'),
     SECOND_MONTH: Symbol('secondMonth'),
@@ -6298,9 +6335,10 @@ var DateRangePicker = function (props) {
         onDayHover: onDayHover,
         onMonthNavigate: onMonthNavigate,
     };
-    return open ? (jsx(Menu, { dateRange: dateRange, minDate: minDateValid, maxDate: maxDateValid, ranges: definedRanges, firstMonth: firstMonth, secondMonth: secondMonth, setFirstMonth: setFirstMonthValidated, setSecondMonth: setSecondMonthValidated, setDateRange: setDateRangeValidated, helpers: helpers, handlers: handlers, showHeader: showHeader })) : null;
+    return open ? (React.createElement(Menu, { dateRange: dateRange, minDate: minDateValid, maxDate: maxDateValid, ranges: definedRanges, firstMonth: firstMonth, secondMonth: secondMonth, setFirstMonth: setFirstMonthValidated, setSecondMonth: setSecondMonthValidated, setDateRange: setDateRangeValidated, helpers: helpers, handlers: handlers, showHeader: showHeader })) : null;
 };
 
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 var useStyles = makeStyles(function () { return ({
     dateRangePickerContainer: {
         position: 'relative',
@@ -6331,7 +6369,10 @@ var DateRangePickerWrapper = function (props) {
     };
     var handleKeyPress = function (event) { return (event === null || event === void 0 ? void 0 : event.key) === 'Escape' && handleToggle(); };
     var wrapperClasses = classnames(classes.dateRangePicker, wrapperClassName);
-    return (jsxs("div", __assign({ className: classes.dateRangePickerContainer }, { children: [open && (jsx("div", { className: classes.dateRangeBackdrop, onKeyPress: handleKeyPress, onClick: handleToggle })), jsx("div", __assign({ className: wrapperClasses }, { children: jsx(DateRangePicker, __assign({}, props)) }))] })));
+    return (React.createElement("div", { className: classes.dateRangePickerContainer },
+        open && (React.createElement("div", { className: classes.dateRangeBackdrop, onKeyPress: handleKeyPress, onClick: handleToggle })),
+        React.createElement("div", { className: wrapperClasses },
+            React.createElement(DateRangePicker, __assign({}, props)))));
 };
 
 /* eslint-disable no-console */
@@ -6358,7 +6399,8 @@ function generateClassName(rule, sheet) {
     return "".concat(prefix, "-").concat(rule.key, "-").concat(ruleCounter);
 }
 
-var DateRangePickerExporter = function (props) { return (jsx(StylesProvider, __assign({ generateClassName: generateClassName }, { children: jsx(DateRangePickerWrapper, __assign({}, props)) }))); };
+var DateRangePickerExporter = function (props) { return (React.createElement(StylesProvider, { generateClassName: generateClassName },
+    React.createElement(DateRangePickerWrapper, __assign({}, props)))); };
 
 export { DateRangePickerExporter as DateRangePicker, DateRangePicker as DateRangePickerComponent };
 //# sourceMappingURL=index.es.js.map
