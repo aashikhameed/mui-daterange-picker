@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { DateRange, DefinedRange } from '../types';
-declare type Marker = symbol;
+type Marker = symbol;
 export declare const MARKERS: {
     [key: string]: Marker;
 };

@@ -1,28 +1,42 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
 var React = require('react');
-var React__default = _interopDefault(React);
 var styles = require('@material-ui/core/styles');
 var core = require('@material-ui/core');
-var SvgIcon = _interopDefault(require('@material-ui/core/SvgIcon'));
+var utils = require('@material-ui/core/utils');
 
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
+function _interopNamespaceDefault(e) {
+    var n = Object.create(null);
+    if (e) {
+        Object.keys(e).forEach(function (k) {
+            if (k !== 'default') {
+                var d = Object.getOwnPropertyDescriptor(e, k);
+                Object.defineProperty(n, k, d.get ? d : {
+                    enumerable: true,
+                    get: function () { return e[k]; }
+                });
+            }
+        });
+    }
+    n.default = e;
+    return Object.freeze(n);
+}
 
-THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
+var React__namespace = /*#__PURE__*/_interopNamespaceDefault(React);
 
-See the Apache Version 2.0 License for specific language governing permissions
-and limitations under the License.
+/******************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
 
 var __assign = function() {
@@ -46,9 +60,9 @@ function createCommonjsModule(fn, module) {
 
 var classnames = createCommonjsModule(function (module) {
 /*!
-  Copyright (c) 2017 Jed Watson.
-  Licensed under the MIT License (MIT), see
-  http://jedwatson.github.io/classnames
+	Copyright (c) 2018 Jed Watson.
+	Licensed under the MIT License (MIT), see
+	http://jedwatson.github.io/classnames
 */
 /* global define */
 
@@ -56,7 +70,7 @@ var classnames = createCommonjsModule(function (module) {
 
 	var hasOwn = {}.hasOwnProperty;
 
-	function classNames () {
+	function classNames() {
 		var classes = [];
 
 		for (var i = 0; i < arguments.length; i++) {
@@ -67,12 +81,19 @@ var classnames = createCommonjsModule(function (module) {
 
 			if (argType === 'string' || argType === 'number') {
 				classes.push(arg);
-			} else if (Array.isArray(arg) && arg.length) {
-				var inner = classNames.apply(null, arg);
-				if (inner) {
-					classes.push(inner);
+			} else if (Array.isArray(arg)) {
+				if (arg.length) {
+					var inner = classNames.apply(null, arg);
+					if (inner) {
+						classes.push(inner);
+					}
 				}
 			} else if (argType === 'object') {
+				if (arg.toString !== Object.prototype.toString && !arg.toString.toString().includes('[native code]')) {
+					classes.push(arg.toString());
+					continue;
+				}
+
 				for (var key in arg) {
 					if (hasOwn.call(arg, key) && arg[key]) {
 						classes.push(key);
@@ -84,7 +105,7 @@ var classnames = createCommonjsModule(function (module) {
 		return classes.join(' ');
 	}
 
-	if ( module.exports) {
+	if (module.exports) {
 		classNames.default = classNames;
 		module.exports = classNames;
 	} else {
@@ -93,7 +114,7 @@ var classnames = createCommonjsModule(function (module) {
 }());
 });
 
-var MILLISECONDS_IN_MINUTE = 60000;
+var MILLISECONDS_IN_MINUTE$6 = 60000;
 
 /**
  * Google Chrome as of 67.0.3396.87 introduced timezones with offset that includes seconds.
@@ -110,9 +131,9 @@ var getTimezoneOffsetInMilliseconds = function getTimezoneOffsetInMilliseconds (
   var date = new Date(dirtyDate.getTime());
   var baseTimezoneOffset = date.getTimezoneOffset();
   date.setSeconds(0, 0);
-  var millisecondsPartOfTimezoneOffset = date.getTime() % MILLISECONDS_IN_MINUTE;
+  var millisecondsPartOfTimezoneOffset = date.getTime() % MILLISECONDS_IN_MINUTE$6;
 
-  return baseTimezoneOffset * MILLISECONDS_IN_MINUTE + millisecondsPartOfTimezoneOffset
+  return baseTimezoneOffset * MILLISECONDS_IN_MINUTE$6 + millisecondsPartOfTimezoneOffset
 };
 
 /**
@@ -136,8 +157,8 @@ function isDate (argument) {
 
 var is_date = isDate;
 
-var MILLISECONDS_IN_HOUR = 3600000;
-var MILLISECONDS_IN_MINUTE$1 = 60000;
+var MILLISECONDS_IN_HOUR$2 = 3600000;
+var MILLISECONDS_IN_MINUTE$5 = 60000;
 var DEFAULT_ADDITIONAL_DIGITS = 2;
 
 var parseTokenDateTimeDelimeter = /[T ]/;
@@ -243,7 +264,7 @@ function parse (argument, dirtyOptions) {
     }
 
     if (dateStrings.timezone) {
-      offset = parseTimezone(dateStrings.timezone) * MILLISECONDS_IN_MINUTE$1;
+      offset = parseTimezone(dateStrings.timezone) * MILLISECONDS_IN_MINUTE$5;
     } else {
       var fullTime = timestamp + time;
       var fullTimeDate = new Date(fullTime);
@@ -399,7 +420,7 @@ function parseTime (timeString) {
   token = parseTokenHH.exec(timeString);
   if (token) {
     hours = parseFloat(token[1].replace(',', '.'));
-    return (hours % 24) * MILLISECONDS_IN_HOUR
+    return (hours % 24) * MILLISECONDS_IN_HOUR$2
   }
 
   // hh:mm or hhmm
@@ -407,8 +428,8 @@ function parseTime (timeString) {
   if (token) {
     hours = parseInt(token[1], 10);
     minutes = parseFloat(token[2].replace(',', '.'));
-    return (hours % 24) * MILLISECONDS_IN_HOUR +
-      minutes * MILLISECONDS_IN_MINUTE$1
+    return (hours % 24) * MILLISECONDS_IN_HOUR$2 +
+      minutes * MILLISECONDS_IN_MINUTE$5
   }
 
   // hh:mm:ss or hhmmss
@@ -417,8 +438,8 @@ function parseTime (timeString) {
     hours = parseInt(token[1], 10);
     minutes = parseInt(token[2], 10);
     var seconds = parseFloat(token[3].replace(',', '.'));
-    return (hours % 24) * MILLISECONDS_IN_HOUR +
-      minutes * MILLISECONDS_IN_MINUTE$1 +
+    return (hours % 24) * MILLISECONDS_IN_HOUR$2 +
+      minutes * MILLISECONDS_IN_MINUTE$5 +
       seconds * 1000
   }
 
@@ -698,8 +719,8 @@ function startOfDay (dirtyDate) {
 
 var start_of_day = startOfDay;
 
-var MILLISECONDS_IN_MINUTE$2 = 60000;
-var MILLISECONDS_IN_DAY = 86400000;
+var MILLISECONDS_IN_MINUTE$4 = 60000;
+var MILLISECONDS_IN_DAY$1 = 86400000;
 
 /**
  * @category Day Helpers
@@ -726,14 +747,14 @@ function differenceInCalendarDays (dirtyDateLeft, dirtyDateRight) {
   var startOfDayRight = start_of_day(dirtyDateRight);
 
   var timestampLeft = startOfDayLeft.getTime() -
-    startOfDayLeft.getTimezoneOffset() * MILLISECONDS_IN_MINUTE$2;
+    startOfDayLeft.getTimezoneOffset() * MILLISECONDS_IN_MINUTE$4;
   var timestampRight = startOfDayRight.getTime() -
-    startOfDayRight.getTimezoneOffset() * MILLISECONDS_IN_MINUTE$2;
+    startOfDayRight.getTimezoneOffset() * MILLISECONDS_IN_MINUTE$4;
 
   // Round the number of days to the nearest integer
   // because the number of milliseconds in a day is not constant
   // (e.g. it's different in the day of the daylight saving time clock shift)
-  return Math.round((timestampLeft - timestampRight) / MILLISECONDS_IN_DAY)
+  return Math.round((timestampLeft - timestampRight) / MILLISECONDS_IN_DAY$1)
 }
 
 var difference_in_calendar_days = differenceInCalendarDays;
@@ -836,7 +857,7 @@ var add_minutes = addMinutes;
  * var result = getDaysInMonth(new Date(2000, 1))
  * //=> 29
  */
-function getDaysInMonth (dirtyDate) {
+function getDaysInMonth$1 (dirtyDate) {
   var date = parse_1(dirtyDate);
   var year = date.getFullYear();
   var monthIndex = date.getMonth();
@@ -846,7 +867,7 @@ function getDaysInMonth (dirtyDate) {
   return lastDayOfMonth.getDate()
 }
 
-var get_days_in_month = getDaysInMonth;
+var get_days_in_month = getDaysInMonth$1;
 
 /**
  * @category Month Helpers
@@ -1211,8 +1232,8 @@ function compareDesc (dirtyDateLeft, dirtyDateRight) {
 
 var compare_desc = compareDesc;
 
-var MILLISECONDS_IN_MINUTE$4 = 60000;
-var MILLISECONDS_IN_WEEK = 604800000;
+var MILLISECONDS_IN_MINUTE$2 = 60000;
+var MILLISECONDS_IN_WEEK$3 = 604800000;
 
 /**
  * @category ISO Week Helpers
@@ -1240,14 +1261,14 @@ function differenceInCalendarISOWeeks (dirtyDateLeft, dirtyDateRight) {
   var startOfISOWeekRight = start_of_iso_week(dirtyDateRight);
 
   var timestampLeft = startOfISOWeekLeft.getTime() -
-    startOfISOWeekLeft.getTimezoneOffset() * MILLISECONDS_IN_MINUTE$4;
+    startOfISOWeekLeft.getTimezoneOffset() * MILLISECONDS_IN_MINUTE$2;
   var timestampRight = startOfISOWeekRight.getTime() -
-    startOfISOWeekRight.getTimezoneOffset() * MILLISECONDS_IN_MINUTE$4;
+    startOfISOWeekRight.getTimezoneOffset() * MILLISECONDS_IN_MINUTE$2;
 
   // Round the number of days to the nearest integer
   // because the number of milliseconds in a week is not constant
   // (e.g. it's different in the week of the daylight saving time clock shift)
-  return Math.round((timestampLeft - timestampRight) / MILLISECONDS_IN_WEEK)
+  return Math.round((timestampLeft - timestampRight) / MILLISECONDS_IN_WEEK$3)
 }
 
 var difference_in_calendar_iso_weeks = differenceInCalendarISOWeeks;
@@ -1364,8 +1385,8 @@ function differenceInCalendarQuarters (dirtyDateLeft, dirtyDateRight) {
 
 var difference_in_calendar_quarters = differenceInCalendarQuarters;
 
-var MILLISECONDS_IN_MINUTE$5 = 60000;
-var MILLISECONDS_IN_WEEK$1 = 604800000;
+var MILLISECONDS_IN_MINUTE$1 = 60000;
+var MILLISECONDS_IN_WEEK$2 = 604800000;
 
 /**
  * @category Week Helpers
@@ -1403,14 +1424,14 @@ function differenceInCalendarWeeks (dirtyDateLeft, dirtyDateRight, dirtyOptions)
   var startOfWeekRight = start_of_week(dirtyDateRight, dirtyOptions);
 
   var timestampLeft = startOfWeekLeft.getTime() -
-    startOfWeekLeft.getTimezoneOffset() * MILLISECONDS_IN_MINUTE$5;
+    startOfWeekLeft.getTimezoneOffset() * MILLISECONDS_IN_MINUTE$1;
   var timestampRight = startOfWeekRight.getTime() -
-    startOfWeekRight.getTimezoneOffset() * MILLISECONDS_IN_MINUTE$5;
+    startOfWeekRight.getTimezoneOffset() * MILLISECONDS_IN_MINUTE$1;
 
   // Round the number of days to the nearest integer
   // because the number of milliseconds in a week is not constant
   // (e.g. it's different in the week of the daylight saving time clock shift)
-  return Math.round((timestampLeft - timestampRight) / MILLISECONDS_IN_WEEK$1)
+  return Math.round((timestampLeft - timestampRight) / MILLISECONDS_IN_WEEK$2)
 }
 
 var difference_in_calendar_weeks = differenceInCalendarWeeks;
@@ -1507,7 +1528,7 @@ function differenceInMilliseconds (dirtyDateLeft, dirtyDateRight) {
 
 var difference_in_milliseconds = differenceInMilliseconds;
 
-var MILLISECONDS_IN_HOUR$2 = 3600000;
+var MILLISECONDS_IN_HOUR = 3600000;
 
 /**
  * @category Hour Helpers
@@ -1529,7 +1550,7 @@ var MILLISECONDS_IN_HOUR$2 = 3600000;
  * //=> 12
  */
 function differenceInHours (dirtyDateLeft, dirtyDateRight) {
-  var diff = difference_in_milliseconds(dirtyDateLeft, dirtyDateRight) / MILLISECONDS_IN_HOUR$2;
+  var diff = difference_in_milliseconds(dirtyDateLeft, dirtyDateRight) / MILLISECONDS_IN_HOUR;
   return diff > 0 ? Math.floor(diff) : Math.ceil(diff)
 }
 
@@ -1598,7 +1619,7 @@ function differenceInISOYears (dirtyDateLeft, dirtyDateRight) {
 
 var difference_in_iso_years = differenceInISOYears;
 
-var MILLISECONDS_IN_MINUTE$6 = 60000;
+var MILLISECONDS_IN_MINUTE = 60000;
 
 /**
  * @category Minute Helpers
@@ -1620,7 +1641,7 @@ var MILLISECONDS_IN_MINUTE$6 = 60000;
  * //=> 12
  */
 function differenceInMinutes (dirtyDateLeft, dirtyDateRight) {
-  var diff = difference_in_milliseconds(dirtyDateLeft, dirtyDateRight) / MILLISECONDS_IN_MINUTE$6;
+  var diff = difference_in_milliseconds(dirtyDateLeft, dirtyDateRight) / MILLISECONDS_IN_MINUTE;
   return diff > 0 ? Math.floor(diff) : Math.ceil(diff)
 }
 
@@ -2000,9 +2021,9 @@ var en = {
   format: build_format_locale()
 };
 
-var MINUTES_IN_DAY = 1440;
+var MINUTES_IN_DAY$1 = 1440;
 var MINUTES_IN_ALMOST_TWO_DAYS = 2520;
-var MINUTES_IN_MONTH = 43200;
+var MINUTES_IN_MONTH$1 = 43200;
 var MINUTES_IN_TWO_MONTHS = 86400;
 
 /**
@@ -2150,7 +2171,7 @@ function distanceInWords (dirtyDateToCompare, dirtyDate, dirtyOptions) {
     return localize('aboutXHours', 1, localizeOptions)
 
   // 1.5 hrs up to 24 hrs
-  } else if (minutes < MINUTES_IN_DAY) {
+  } else if (minutes < MINUTES_IN_DAY$1) {
     var hours = Math.round(minutes / 60);
     return localize('aboutXHours', hours, localizeOptions)
 
@@ -2159,13 +2180,13 @@ function distanceInWords (dirtyDateToCompare, dirtyDate, dirtyOptions) {
     return localize('xDays', 1, localizeOptions)
 
   // 1.75 days up to 30 days
-  } else if (minutes < MINUTES_IN_MONTH) {
-    var days = Math.round(minutes / MINUTES_IN_DAY);
+  } else if (minutes < MINUTES_IN_MONTH$1) {
+    var days = Math.round(minutes / MINUTES_IN_DAY$1);
     return localize('xDays', days, localizeOptions)
 
   // 1 month up to 2 months
   } else if (minutes < MINUTES_IN_TWO_MONTHS) {
-    months = Math.round(minutes / MINUTES_IN_MONTH);
+    months = Math.round(minutes / MINUTES_IN_MONTH$1);
     return localize('aboutXMonths', months, localizeOptions)
   }
 
@@ -2173,7 +2194,7 @@ function distanceInWords (dirtyDateToCompare, dirtyDate, dirtyOptions) {
 
   // 2 months up to 12 months
   if (months < 12) {
-    var nearestMonth = Math.round(minutes / MINUTES_IN_MONTH);
+    var nearestMonth = Math.round(minutes / MINUTES_IN_MONTH$1);
     return localize('xMonths', nearestMonth, localizeOptions)
 
   // 1 year up to max Date
@@ -2198,8 +2219,8 @@ function distanceInWords (dirtyDateToCompare, dirtyDate, dirtyOptions) {
 
 var distance_in_words = distanceInWords;
 
-var MINUTES_IN_DAY$1 = 1440;
-var MINUTES_IN_MONTH$1 = 43200;
+var MINUTES_IN_DAY = 1440;
+var MINUTES_IN_MONTH = 43200;
 var MINUTES_IN_YEAR = 525600;
 
 /**
@@ -2325,9 +2346,9 @@ function distanceInWordsStrict (dirtyDateToCompare, dirtyDate, dirtyOptions) {
       unit = 's';
     } else if (minutes < 60) {
       unit = 'm';
-    } else if (minutes < MINUTES_IN_DAY$1) {
+    } else if (minutes < MINUTES_IN_DAY) {
       unit = 'h';
-    } else if (minutes < MINUTES_IN_MONTH$1) {
+    } else if (minutes < MINUTES_IN_MONTH) {
       unit = 'd';
     } else if (minutes < MINUTES_IN_YEAR) {
       unit = 'M';
@@ -2351,12 +2372,12 @@ function distanceInWordsStrict (dirtyDateToCompare, dirtyDate, dirtyOptions) {
 
   // 1 up to 30 days
   } else if (unit === 'd') {
-    days = mathPartial(minutes / MINUTES_IN_DAY$1);
+    days = mathPartial(minutes / MINUTES_IN_DAY);
     return localize('xDays', days, localizeOptions)
 
   // 1 up to 12 months
   } else if (unit === 'M') {
-    months = mathPartial(minutes / MINUTES_IN_MONTH$1);
+    months = mathPartial(minutes / MINUTES_IN_MONTH);
     return localize('xMonths', months, localizeOptions)
 
   // 1 year up to max Date
@@ -2900,7 +2921,7 @@ function getDayOfYear (dirtyDate) {
 
 var get_day_of_year = getDayOfYear;
 
-var MILLISECONDS_IN_WEEK$2 = 604800000;
+var MILLISECONDS_IN_WEEK$1 = 604800000;
 
 /**
  * @category ISO Week Helpers
@@ -2926,7 +2947,7 @@ function getISOWeek (dirtyDate) {
   // Round the number of days to the nearest integer
   // because the number of milliseconds in a week is not constant
   // (e.g. it's different in the week of the daylight saving time clock shift)
-  return Math.round(diff / MILLISECONDS_IN_WEEK$2) + 1
+  return Math.round(diff / MILLISECONDS_IN_WEEK$1) + 1
 }
 
 var get_iso_week = getISOWeek;
@@ -3431,7 +3452,7 @@ function getISODay (dirtyDate) {
 
 var get_iso_day = getISODay;
 
-var MILLISECONDS_IN_WEEK$3 = 604800000;
+var MILLISECONDS_IN_WEEK = 604800000;
 
 /**
  * @category ISO Week-Numbering Year Helpers
@@ -3457,7 +3478,7 @@ function getISOWeeksInYear (dirtyDate) {
   // Round the number of weeks to the nearest integer
   // because the number of milliseconds in a week is not constant
   // (e.g. it's different in the week of the daylight saving time clock shift)
-  return Math.round(diff / MILLISECONDS_IN_WEEK$3)
+  return Math.round(diff / MILLISECONDS_IN_WEEK)
 }
 
 var get_iso_weeks_in_year = getISOWeeksInYear;
@@ -3531,7 +3552,7 @@ function getMonth (dirtyDate) {
 
 var get_month = getMonth;
 
-var MILLISECONDS_IN_DAY$1 = 24 * 60 * 60 * 1000;
+var MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
 
 /**
  * @category Range Helpers
@@ -3587,7 +3608,7 @@ function getOverlappingDaysInRanges (dirtyInitialRangeStartDate, dirtyInitialRan
 
   var differenceInMs = overlapEndDate - overlapStartDate;
 
-  return Math.ceil(differenceInMs / MILLISECONDS_IN_DAY$1)
+  return Math.ceil(differenceInMs / MILLISECONDS_IN_DAY)
 }
 
 var get_overlapping_days_in_ranges = getOverlappingDaysInRanges;
@@ -5760,7 +5781,7 @@ var combine = function () {
     return args.filter(identity).join(' ');
 };
 // Date
-var getDaysInMonth$1 = function (date) {
+var getDaysInMonth = function (date) {
     var startWeek = dateFns_142(dateFns_137(date));
     var endWeek = dateFns_47(dateFns_42(date));
     var days = [];
@@ -5863,62 +5884,104 @@ module.exports = _interopRequireDefault;
 
 unwrapExports(interopRequireDefault);
 
-var _extends_1 = createCommonjsModule(function (module) {
-function _extends() {
-  module.exports = _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
+var _typeof_1 = createCommonjsModule(function (module) {
+function _typeof(obj) {
+  "@babel/helpers - typeof";
 
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
 
-    return target;
-  };
-
-  return _extends.apply(this, arguments);
+  return _typeof(obj);
 }
 
-module.exports = _extends;
+module.exports = _typeof;
 });
 
-var createSvgIcon_1 = createCommonjsModule(function (module, exports) {
+var interopRequireWildcard = createCommonjsModule(function (module) {
+function _getRequireWildcardCache() {
+  if (typeof WeakMap !== "function") return null;
+  var cache = new WeakMap();
 
+  _getRequireWildcardCache = function _getRequireWildcardCache() {
+    return cache;
+  };
 
+  return cache;
+}
+
+function _interopRequireWildcard(obj) {
+  if (obj && obj.__esModule) {
+    return obj;
+  }
+
+  if (obj === null || _typeof_1(obj) !== "object" && typeof obj !== "function") {
+    return {
+      "default": obj
+    };
+  }
+
+  var cache = _getRequireWildcardCache();
+
+  if (cache && cache.has(obj)) {
+    return cache.get(obj);
+  }
+
+  var newObj = {};
+  var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+
+  for (var key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+
+      if (desc && (desc.get || desc.set)) {
+        Object.defineProperty(newObj, key, desc);
+      } else {
+        newObj[key] = obj[key];
+      }
+    }
+  }
+
+  newObj["default"] = obj;
+
+  if (cache) {
+    cache.set(obj, newObj);
+  }
+
+  return newObj;
+}
+
+module.exports = _interopRequireWildcard;
+});
+
+unwrapExports(interopRequireWildcard);
+
+var createSvgIcon = createCommonjsModule(function (module, exports) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = createSvgIcon;
-
-var _extends2 = interopRequireDefault(_extends_1);
-
-var _react = interopRequireDefault(React__default);
-
-var _SvgIcon = interopRequireDefault(SvgIcon);
-
-function createSvgIcon(path, displayName) {
-  var Component = _react.default.memo(_react.default.forwardRef(function (props, ref) {
-    return _react.default.createElement(_SvgIcon.default, (0, _extends2.default)({
-      ref: ref
-    }, props), path);
-  }));
-
-  if (process.env.NODE_ENV !== 'production') {
-    Component.displayName = "".concat(displayName, "Icon");
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function get() {
+    return utils.createSvgIcon;
   }
-
-  Component.muiName = _SvgIcon.default.muiName;
-  return Component;
-}
+});
 });
 
-unwrapExports(createSvgIcon_1);
+unwrapExports(createSvgIcon);
+
+var require$$1 = createSvgIcon;
 
 var ArrowRightAlt = createCommonjsModule(function (module, exports) {
+
+
 
 
 
@@ -5927,11 +5990,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = interopRequireDefault(React__default);
+var React$1 = interopRequireWildcard(React);
 
-var _createSvgIcon = interopRequireDefault(createSvgIcon_1);
+var _createSvgIcon = interopRequireDefault(require$$1);
 
-var _default = (0, _createSvgIcon.default)(_react.default.createElement("path", {
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React$1.createElement("path", {
   d: "M16.01 11H4v2h12.01v3L20 12l-3.99-4z"
 }), 'ArrowRightAlt');
 
@@ -5944,16 +6007,18 @@ var ChevronLeft = createCommonjsModule(function (module, exports) {
 
 
 
+
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 
-var _react = interopRequireDefault(React__default);
+var React$1 = interopRequireWildcard(React);
 
-var _createSvgIcon = interopRequireDefault(createSvgIcon_1);
+var _createSvgIcon = interopRequireDefault(require$$1);
 
-var _default = (0, _createSvgIcon.default)(_react.default.createElement("path", {
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React$1.createElement("path", {
   d: "M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
 }), 'ChevronLeft');
 
@@ -5966,16 +6031,18 @@ var ChevronRight = createCommonjsModule(function (module, exports) {
 
 
 
+
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 
-var _react = interopRequireDefault(React__default);
+var React$1 = interopRequireWildcard(React);
 
-var _createSvgIcon = interopRequireDefault(createSvgIcon_1);
+var _createSvgIcon = interopRequireDefault(require$$1);
 
-var _default = (0, _createSvgIcon.default)(_react.default.createElement("path", {
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React$1.createElement("path", {
   d: "M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
 }), 'ChevronRight');
 
@@ -5985,7 +6052,7 @@ exports.default = _default;
 var ChevronRight$1 = unwrapExports(ChevronRight);
 
 /* eslint-disable radix */
-var useStyles = core.makeStyles(function () { return ({
+var useStyles$4 = core.makeStyles(function () { return ({
     iconContainer: {
         padding: 5,
     },
@@ -6018,28 +6085,28 @@ var generateYears = function (relativeTo, count) {
 };
 var Header = function (_a) {
     var date = _a.date, setDate = _a.setDate, nextDisabled = _a.nextDisabled, prevDisabled = _a.prevDisabled, onClickNext = _a.onClickNext, onClickPrevious = _a.onClickPrevious;
-    var classes = useStyles();
+    var classes = useStyles$4();
     var handleMonthChange = function (event) {
         setDate(dateFns_128(date, parseInt(event.target.value)));
     };
     var handleYearChange = function (event) {
         setDate(dateFns_131(date, parseInt(event.target.value)));
     };
-    return (React__default.createElement(core.Grid, { container: true, justify: "space-between", alignItems: "center" },
-        React__default.createElement(core.Grid, { item: true, className: classes.iconContainer },
-            React__default.createElement(core.IconButton, { className: classes.icon, disabled: prevDisabled, onClick: onClickPrevious },
-                React__default.createElement(ChevronLeft$1, { color: prevDisabled ? 'disabled' : 'action' }))),
-        React__default.createElement(core.Grid, { item: true },
-            React__default.createElement(core.Select, { value: dateFns_63(date), onChange: handleMonthChange, MenuProps: { disablePortal: true } }, MONTHS.map(function (month, idx) { return (React__default.createElement(core.MenuItem, { key: month, value: idx }, month)); }))),
-        React__default.createElement(core.Grid, { item: true },
-            React__default.createElement(core.Select, { value: dateFns_68(date), onChange: handleYearChange, MenuProps: { disablePortal: true } }, generateYears(date, 30).map(function (year) { return (React__default.createElement(core.MenuItem, { key: year, value: year }, year)); }))),
-        React__default.createElement(core.Grid, { item: true, className: classes.iconContainer },
-            React__default.createElement(core.IconButton, { className: classes.icon, disabled: nextDisabled, onClick: onClickNext },
-                React__default.createElement(ChevronRight$1, { color: nextDisabled ? 'disabled' : 'action' })))));
+    return (React.createElement(core.Grid, { container: true, justify: "space-between", alignItems: "center" },
+        React.createElement(core.Grid, { item: true, className: classes.iconContainer },
+            React.createElement(core.IconButton, { className: classes.icon, disabled: prevDisabled, onClick: onClickPrevious },
+                React.createElement(ChevronLeft$1, { color: prevDisabled ? 'disabled' : 'action' }))),
+        React.createElement(core.Grid, { item: true },
+            React.createElement(core.Select, { value: dateFns_63(date), onChange: handleMonthChange, MenuProps: { disablePortal: true } }, MONTHS.map(function (month, idx) { return (React.createElement(core.MenuItem, { key: month, value: idx }, month)); }))),
+        React.createElement(core.Grid, { item: true },
+            React.createElement(core.Select, { value: dateFns_68(date), onChange: handleYearChange, MenuProps: { disablePortal: true } }, generateYears(date, 30).map(function (year) { return (React.createElement(core.MenuItem, { key: year, value: year }, year)); }))),
+        React.createElement(core.Grid, { item: true, className: classes.iconContainer },
+            React.createElement(core.IconButton, { className: classes.icon, disabled: nextDisabled, onClick: onClickNext },
+                React.createElement(ChevronRight$1, { color: nextDisabled ? 'disabled' : 'action' })))));
 };
 
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
-var useStyles$1 = core.makeStyles(function (theme) { return ({
+var useStyles$3 = core.makeStyles(function (theme) { return ({
     leftBorderRadius: {
         borderRadius: '50% 0 0 50%',
     },
@@ -6058,7 +6125,7 @@ var useStyles$1 = core.makeStyles(function (theme) { return ({
         lineHeight: 1.6,
     },
     outlined: {
-        border: "1px solid " + theme.palette.primary.dark,
+        border: "1px solid ".concat(theme.palette.primary.dark),
     },
     filled: {
         '&:hover': {
@@ -6068,7 +6135,7 @@ var useStyles$1 = core.makeStyles(function (theme) { return ({
     },
     highlighted: {
         backgroundColor: theme.palette.action.hover,
-        border: "1px 0px 1px 0px dotted " + theme.palette.primary.dark,
+        border: "1px 0px 1px 0px dotted ".concat(theme.palette.primary.dark),
     },
     contrast: {
         color: theme.palette.primary.contrastText,
@@ -6076,10 +6143,10 @@ var useStyles$1 = core.makeStyles(function (theme) { return ({
 }); });
 var Day = function (_a) {
     var startOfRange = _a.startOfRange, endOfRange = _a.endOfRange, disabled = _a.disabled, highlighted = _a.highlighted, outlined = _a.outlined, filled = _a.filled, onClick = _a.onClick, onHover = _a.onHover, value = _a.value;
-    var classes = useStyles$1();
-    return (React.createElement("div", { className: combine(classes.buttonContainer, startOfRange && classes.leftBorderRadius, endOfRange && classes.rightBorderRadius, !disabled && highlighted && classes.highlighted) },
-        React.createElement(core.IconButton, { className: combine(classes.button, !disabled && outlined && classes.outlined, !disabled && filled && classes.filled), disabled: disabled, onClick: onClick, onMouseOver: onHover },
-            React.createElement(core.Typography, { color: !disabled ? 'textPrimary' : 'textSecondary', className: combine(classes.buttonText, !disabled && filled && classes.contrast), variant: "body2" }, value))));
+    var classes = useStyles$3();
+    return (React__namespace.createElement("div", { className: combine(classes.buttonContainer, startOfRange && classes.leftBorderRadius, endOfRange && classes.rightBorderRadius, !disabled && highlighted && classes.highlighted) },
+        React__namespace.createElement(core.IconButton, { className: combine(classes.button, !disabled && outlined && classes.outlined, !disabled && filled && classes.filled), disabled: disabled, onClick: onClick, onMouseOver: onHover },
+            React__namespace.createElement(core.Typography, { color: !disabled ? 'textPrimary' : 'textSecondary', className: combine(classes.buttonText, !disabled && filled && classes.contrast), variant: "body2" }, value))));
 };
 
 var NavigationAction;
@@ -6112,18 +6179,18 @@ var Month = function (props) {
     var helpers = props.helpers, handlers = props.handlers, date = props.value, dateRange = props.dateRange, marker = props.marker, setDate = props.setValue, minDate = props.minDate, maxDate = props.maxDate;
     // eslint-disable-next-line react/destructuring-assignment
     var _a = props.navState, back = _a[0], forward = _a[1];
-    return (React.createElement(core.Paper, { square: true, elevation: 0, className: classes.root },
-        React.createElement(core.Grid, { container: true },
-            React.createElement(Header, { date: date, setDate: setDate, nextDisabled: !forward, prevDisabled: !back, onClickPrevious: function () { return handlers.onMonthNavigate(marker, NavigationAction.Previous); }, onClickNext: function () { return handlers.onMonthNavigate(marker, NavigationAction.Next); } }),
-            React.createElement(core.Grid, { item: true, container: true, direction: "row", justify: "space-between", className: classes.weekDaysContainer }, WEEK_DAYS.map(function (day) { return (React.createElement(core.Typography, { color: "textSecondary", key: day, variant: "caption" }, day)); })),
-            React.createElement(core.Grid, { item: true, container: true, direction: "column", justify: "space-between", className: classes.daysContainer }, chunks(getDaysInMonth$1(date), 7).map(function (week, idx) { return (
+    return (React__namespace.createElement(core.Paper, { square: true, elevation: 0, className: classes.root },
+        React__namespace.createElement(core.Grid, { container: true },
+            React__namespace.createElement(Header, { date: date, setDate: setDate, nextDisabled: !forward, prevDisabled: !back, onClickPrevious: function () { return handlers.onMonthNavigate(marker, NavigationAction.Previous); }, onClickNext: function () { return handlers.onMonthNavigate(marker, NavigationAction.Next); } }),
+            React__namespace.createElement(core.Grid, { item: true, container: true, direction: "row", justify: "space-between", className: classes.weekDaysContainer }, WEEK_DAYS.map(function (day) { return (React__namespace.createElement(core.Typography, { color: "textSecondary", key: day, variant: "caption" }, day)); })),
+            React__namespace.createElement(core.Grid, { item: true, container: true, direction: "column", justify: "space-between", className: classes.daysContainer }, chunks(getDaysInMonth(date), 7).map(function (week, idx) { return (
             // eslint-disable-next-line react/no-array-index-key
-            React.createElement(core.Grid, { key: idx, container: true, direction: "row", justify: "center" }, week.map(function (day) {
+            React__namespace.createElement(core.Grid, { key: idx, container: true, direction: "row", justify: "center" }, week.map(function (day) {
                 var isStart = isStartOfRange(dateRange, day);
                 var isEnd = isEndOfRange(dateRange, day);
                 var isRangeOneDay = isRangeSameDay(dateRange);
                 var highlighted = inDateRange(dateRange, day) || helpers.inHoverRange(day);
-                return (React.createElement(Day, { key: dateFns_50(day, 'MM-DD-YYYY'), filled: isStart || isEnd, outlined: dateFns_102(day), highlighted: highlighted && !isRangeOneDay, disabled: !dateFns_85(date, day)
+                return (React__namespace.createElement(Day, { key: dateFns_50(day, 'MM-DD-YYYY'), filled: isStart || isEnd, outlined: dateFns_102(day), highlighted: highlighted && !isRangeOneDay, disabled: !dateFns_85(date, day)
                         || !dateFns_108(day, minDate, maxDate), startOfRange: isStart && !isRangeOneDay, endOfRange: isEnd && !isRangeOneDay, onClick: function () { return handlers.onDayClick(day); }, onHover: function () { return handlers.onDayHover(day); }, value: dateFns_51(day) }));
             }))); })))));
 };
@@ -6138,10 +6205,10 @@ var isSameRange = function (first, second) {
 };
 var DefinedRanges = function (_a) {
     var ranges = _a.ranges, setRange = _a.setRange, selectedRange = _a.selectedRange;
-    return (React__default.createElement(core.List, null, ranges.map(function (range, idx) { return (
+    return (React.createElement(core.List, null, ranges.map(function (range, idx) { return (
     // eslint-disable-next-line react/no-array-index-key
-    React__default.createElement(core.ListItem, { button: true, key: idx, onClick: function () { return setRange(range); } },
-        React__default.createElement(core.ListItemText, { primaryTypographyProps: {
+    React.createElement(core.ListItem, { button: true, key: idx, onClick: function () { return setRange(range); } },
+        React.createElement(core.ListItemText, { primaryTypographyProps: {
                 variant: 'body2',
                 style: {
                     fontWeight: isSameRange(range, selectedRange)
@@ -6151,7 +6218,7 @@ var DefinedRanges = function (_a) {
             } }, range.label))); })));
 };
 
-var useStyles$3 = core.makeStyles(function (theme) { return ({
+var useStyles$1 = core.makeStyles(function (theme) { return ({
     header: {
         padding: "20px 70px",
     },
@@ -6160,12 +6227,12 @@ var useStyles$3 = core.makeStyles(function (theme) { return ({
         textAlign: "center",
     },
     divider: {
-        borderLeft: "1px solid " + theme.palette.action.hover,
+        borderLeft: "1px solid ".concat(theme.palette.action.hover),
         marginBottom: 20,
     },
 }); });
 var Menu = function (props) {
-    var classes = useStyles$3();
+    var classes = useStyles$1();
     var ranges = props.ranges, dateRange = props.dateRange, minDate = props.minDate, maxDate = props.maxDate, firstMonth = props.firstMonth, setFirstMonth = props.setFirstMonth, secondMonth = props.secondMonth, setSecondMonth = props.setSecondMonth, setDateRange = props.setDateRange, helpers = props.helpers, handlers = props.handlers, showHeader = props.showHeader;
     var startDate = dateRange.startDate, endDate = dateRange.endDate;
     var canNavigateCloser = dateFns_19(secondMonth, firstMonth) >= 2;
@@ -6176,27 +6243,27 @@ var Menu = function (props) {
         helpers: helpers,
         handlers: handlers,
     };
-    return (React__default.createElement(core.Paper, { elevation: 5, square: true },
-        React__default.createElement(core.Grid, { container: true, direction: "row", wrap: "nowrap" },
-            React__default.createElement(core.Grid, null,
-                showHeader ? (React__default.createElement(React__default.Fragment, null,
-                    React__default.createElement(core.Grid, { container: true, className: classes.header, alignItems: "center" },
-                        React__default.createElement(core.Grid, { item: true, className: classes.headerItem },
-                            React__default.createElement(core.Typography, { variant: "subtitle1" }, startDate
+    return (React.createElement(core.Paper, { elevation: 5, square: true },
+        React.createElement(core.Grid, { container: true, direction: "row", wrap: "nowrap" },
+            React.createElement(core.Grid, null,
+                showHeader ? (React.createElement(React.Fragment, null,
+                    React.createElement(core.Grid, { container: true, className: classes.header, alignItems: "center" },
+                        React.createElement(core.Grid, { item: true, className: classes.headerItem },
+                            React.createElement(core.Typography, { variant: "subtitle1" }, startDate
                                 ? dateFns_50(startDate, "MMMM DD, YYYY")
                                 : "Start Date")),
-                        React__default.createElement(core.Grid, { item: true, className: classes.headerItem },
-                            React__default.createElement(ArrowRightAlt$1, { color: "action" })),
-                        React__default.createElement(core.Grid, { item: true, className: classes.headerItem },
-                            React__default.createElement(core.Typography, { variant: "subtitle1" }, endDate ? dateFns_50(endDate, "MMMM DD, YYYY") : "End Date"))),
-                    React__default.createElement(core.Divider, null))) : null,
-                React__default.createElement(core.Grid, { container: true, direction: "row", justify: "center", wrap: "nowrap" },
-                    React__default.createElement(Month, __assign({}, commonProps, { value: firstMonth, setValue: setFirstMonth, navState: [true, canNavigateCloser], marker: MARKERS.FIRST_MONTH })),
-                    React__default.createElement("div", { className: classes.divider }),
-                    React__default.createElement(Month, __assign({}, commonProps, { value: secondMonth, setValue: setSecondMonth, navState: [canNavigateCloser, true], marker: MARKERS.SECOND_MONTH })))),
-            React__default.createElement("div", { className: classes.divider }),
-            React__default.createElement(core.Grid, null,
-                React__default.createElement(DefinedRanges, { selectedRange: dateRange, ranges: ranges, setRange: setDateRange })))));
+                        React.createElement(core.Grid, { item: true, className: classes.headerItem },
+                            React.createElement(ArrowRightAlt$1, { color: "action" })),
+                        React.createElement(core.Grid, { item: true, className: classes.headerItem },
+                            React.createElement(core.Typography, { variant: "subtitle1" }, endDate ? dateFns_50(endDate, "MMMM DD, YYYY") : "End Date"))),
+                    React.createElement(core.Divider, null))) : null,
+                React.createElement(core.Grid, { container: true, direction: "row", justify: "center", wrap: "nowrap" },
+                    React.createElement(Month, __assign({}, commonProps, { value: firstMonth, setValue: setFirstMonth, navState: [true, canNavigateCloser], marker: MARKERS.FIRST_MONTH })),
+                    React.createElement("div", { className: classes.divider }),
+                    React.createElement(Month, __assign({}, commonProps, { value: secondMonth, setValue: setSecondMonth, navState: [canNavigateCloser, true], marker: MARKERS.SECOND_MONTH })))),
+            React.createElement("div", { className: classes.divider }),
+            React.createElement(core.Grid, null,
+                React.createElement(DefinedRanges, { selectedRange: dateRange, ranges: ranges, setRange: setDateRange })))));
 };
 
 /* eslint-disable no-multi-assign */
@@ -6210,10 +6277,10 @@ var DateRangePicker = function (props) {
     var minDateValid = parseOptionalDate(minDate, dateFns_10(today, -10));
     var maxDateValid = parseOptionalDate(maxDate, dateFns_10(today, 10));
     var _b = getValidatedMonths(initialDateRange || {}, minDateValid, maxDateValid), intialFirstMonth = _b[0], initialSecondMonth = _b[1];
-    var _c = React.useState(__assign({}, initialDateRange)), dateRange = _c[0], setDateRange = _c[1];
-    var _d = React.useState(), hoverDay = _d[0], setHoverDay = _d[1];
-    var _e = React.useState(intialFirstMonth || today), firstMonth = _e[0], setFirstMonth = _e[1];
-    var _f = React.useState(initialSecondMonth || dateFns_6(firstMonth, 1)), secondMonth = _f[0], setSecondMonth = _f[1];
+    var _c = React__namespace.useState(__assign({}, initialDateRange)), dateRange = _c[0], setDateRange = _c[1];
+    var _d = React__namespace.useState(), hoverDay = _d[0], setHoverDay = _d[1];
+    var _e = React__namespace.useState(intialFirstMonth || today), firstMonth = _e[0], setFirstMonth = _e[1];
+    var _f = React__namespace.useState(initialSecondMonth || dateFns_6(firstMonth, 1)), secondMonth = _f[0], setSecondMonth = _f[1];
     var startDate = dateRange.startDate, endDate = dateRange.endDate;
     // handlers
     var setFirstMonthValidated = function (date) {
@@ -6288,11 +6355,11 @@ var DateRangePicker = function (props) {
         onDayHover: onDayHover,
         onMonthNavigate: onMonthNavigate,
     };
-    return open ? (React.createElement(Menu, { dateRange: dateRange, minDate: minDateValid, maxDate: maxDateValid, ranges: definedRanges, firstMonth: firstMonth, secondMonth: secondMonth, setFirstMonth: setFirstMonthValidated, setSecondMonth: setSecondMonthValidated, setDateRange: setDateRangeValidated, helpers: helpers, handlers: handlers, showHeader: showHeader })) : null;
+    return open ? (React__namespace.createElement(Menu, { dateRange: dateRange, minDate: minDateValid, maxDate: maxDateValid, ranges: definedRanges, firstMonth: firstMonth, secondMonth: secondMonth, setFirstMonth: setFirstMonthValidated, setSecondMonth: setSecondMonthValidated, setDateRange: setDateRangeValidated, helpers: helpers, handlers: handlers, showHeader: showHeader })) : null;
 };
 
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-var useStyles$4 = core.makeStyles(function () { return ({
+var useStyles = core.makeStyles(function () { return ({
     dateRangePickerContainer: {
         position: 'relative',
     },
@@ -6312,7 +6379,7 @@ var useStyles$4 = core.makeStyles(function () { return ({
     },
 }); });
 var DateRangePickerWrapper = function (props) {
-    var classes = useStyles$4();
+    var classes = useStyles();
     var closeOnClickOutside = props.closeOnClickOutside, wrapperClassName = props.wrapperClassName, toggle = props.toggle, open = props.open;
     var handleToggle = function () {
         if (closeOnClickOutside === false) {
@@ -6322,10 +6389,10 @@ var DateRangePickerWrapper = function (props) {
     };
     var handleKeyPress = function (event) { return (event === null || event === void 0 ? void 0 : event.key) === 'Escape' && handleToggle(); };
     var wrapperClasses = classnames(classes.dateRangePicker, wrapperClassName);
-    return (React.createElement("div", { className: classes.dateRangePickerContainer },
-        open && (React.createElement("div", { className: classes.dateRangeBackdrop, onKeyPress: handleKeyPress, onClick: handleToggle })),
-        React.createElement("div", { className: wrapperClasses },
-            React.createElement(DateRangePicker, __assign({}, props)))));
+    return (React__namespace.createElement("div", { className: classes.dateRangePickerContainer },
+        open && (React__namespace.createElement("div", { className: classes.dateRangeBackdrop, onKeyPress: handleKeyPress, onClick: handleToggle })),
+        React__namespace.createElement("div", { className: wrapperClasses },
+            React__namespace.createElement(DateRangePicker, __assign({}, props)))));
 };
 
 /* eslint-disable no-console */
@@ -6347,13 +6414,13 @@ function generateClassName(rule, sheet) {
         ].join(''));
     }
     if (sheet && sheet.options.meta) {
-        return prefix + "-" + sheet.options.meta + "-" + rule.key + "-" + ruleCounter;
+        return "".concat(prefix, "-").concat(sheet.options.meta, "-").concat(rule.key, "-").concat(ruleCounter);
     }
-    return prefix + "-" + rule.key + "-" + ruleCounter;
+    return "".concat(prefix, "-").concat(rule.key, "-").concat(ruleCounter);
 }
 
-var DateRangePickerExporter = function (props) { return (React.createElement(styles.StylesProvider, { generateClassName: generateClassName },
-    React.createElement(DateRangePickerWrapper, __assign({}, props)))); };
+var DateRangePickerExporter = function (props) { return (React__namespace.createElement(styles.StylesProvider, { generateClassName: generateClassName },
+    React__namespace.createElement(DateRangePickerWrapper, __assign({}, props)))); };
 
 exports.DateRangePicker = DateRangePickerExporter;
 exports.DateRangePickerComponent = DateRangePicker;
