@@ -23,10 +23,6 @@ import {
 import Header from './Header';
 import Day from './Day';
 
-
-// eslint-disable-next-line no-unused-vars
-import { NavigationAction, DateRange } from '../types';
-
 const WEEK_DAYS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
 const useStyles = makeStyles(() => ({
@@ -46,25 +42,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-interface MonthProps {
-  value: Date;
-  marker: symbol;
-  dateRange: DateRange;
-  minDate: Date;
-  maxDate: Date;
-  navState: [boolean, boolean];
-  setValue: (date: Date) => void;
-  helpers: {
-    inHoverRange: (day: Date) => boolean;
-  };
-  handlers: {
-    onDayClick: (day: Date) => void;
-    onDayHover: (day: Date) => void;
-    onMonthNavigate: (marker: symbol, action: NavigationAction) => void;
-  };
-}
-
-const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
+const Month = (props) => {
   const classes = useStyles();
 
   const {
@@ -78,7 +56,6 @@ const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
     maxDate,
   } = props;
 
-  // eslint-disable-next-line react/destructuring-assignment
   const [back, forward] = props.navState;
 
   return (

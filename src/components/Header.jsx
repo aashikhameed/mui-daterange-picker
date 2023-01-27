@@ -29,15 +29,6 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-interface HeaderProps {
-  date: Date;
-  setDate: (date: Date) => void;
-  nextDisabled: boolean;
-  prevDisabled: boolean;
-  onClickNext: () => void;
-  onClickPrevious: () => void;
-}
-
 const MONTHS = [
   'Jan',
   'Feb',
@@ -53,28 +44,28 @@ const MONTHS = [
   'Dec',
 ];
 
-const generateYears = (relativeTo: Date, count: number) => {
+const generateYears = (relativeTo, count) => {
   const half = Math.floor(count / 2);
   return Array(count)
     .fill(0)
     .map((_y, i) => relativeTo.getFullYear() - half + i); // TODO: make part of the state
 };
 
-const Header: React.FunctionComponent<HeaderProps> = ({
+const Header = ({
   date,
   setDate,
   nextDisabled,
   prevDisabled,
   onClickNext,
   onClickPrevious,
-}: HeaderProps) => {
+}) => {
   const classes = useStyles();
 
-  const handleMonthChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleMonthChange = (event) => {
     setDate(setMonth(date, parseInt(event.target.value)));
   };
 
-  const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleYearChange = (event) => {
     setDate(setYear(date, parseInt(event.target.value)));
   };
 

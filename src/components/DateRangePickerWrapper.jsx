@@ -29,21 +29,8 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export interface DateRangePickerWrapperProps {
-  open: boolean;
-  toggle: () => void;
-  initialDateRange?: DateRange;
-  definedRanges?: DefinedRange[];
-  minDate?: Date | string;
-  maxDate?: Date | string;
-  onChange: (dateRange: DateRange) => void;
-  closeOnClickOutside?: boolean;
-  wrapperClassName?: string;
-  showHeader: boolean;
-}
-
-const DateRangePickerWrapper: React.FunctionComponent<DateRangePickerWrapperProps> = (
-  props: DateRangePickerWrapperProps,
+const DateRangePickerWrapper = (
+  props,
 ) => {
   const classes = useStyles();
 
@@ -62,7 +49,7 @@ const DateRangePickerWrapper: React.FunctionComponent<DateRangePickerWrapperProp
     toggle();
   };
 
-  const handleKeyPress = (event: any) => event?.key === 'Escape' && handleToggle();
+  const handleKeyPress = (event) => event?.key === 'Escape' && handleToggle();
 
   const wrapperClasses = classNames(classes.dateRangePicker, wrapperClassName);
 

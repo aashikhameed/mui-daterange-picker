@@ -1,24 +1,24 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 
-import * as React from 'react';
+import * as React from "react";
 import {
   IconButton,
   Typography,
   makeStyles,
   // eslint-disable-next-line no-unused-vars
   Theme,
-} from '@material-ui/core';
-import { combine } from '../utils';
+} from "@material-ui/core";
+import { combine } from "../utils";
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
   leftBorderRadius: {
-    borderRadius: '50% 0 0 50%',
+    borderRadius: "50% 0 0 50%",
   },
   rightBorderRadius: {
-    borderRadius: '0 50% 50% 0',
+    borderRadius: "0 50% 50% 0",
   },
   buttonContainer: {
-    display: 'flex',
+    display: "flex",
   },
   button: {
     height: 36,
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: `1px solid ${theme.palette.primary.dark}`,
   },
   filled: {
-    '&:hover': {
+    "&:hover": {
       backgroundColor: theme.palette.primary.dark,
     },
     backgroundColor: theme.palette.primary.dark,
@@ -46,19 +46,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface DayProps {
-  filled?: boolean;
-  outlined?: boolean;
-  highlighted?: boolean;
-  disabled?: boolean;
-  startOfRange?: boolean;
-  endOfRange?: boolean;
-  onClick?: () => void;
-  onHover?: () => void;
-  value: number | string;
-}
-
-const Day: React.FunctionComponent<DayProps> = ({
+const Day = ({
   startOfRange,
   endOfRange,
   disabled,
@@ -68,7 +56,7 @@ const Day: React.FunctionComponent<DayProps> = ({
   onClick,
   onHover,
   value,
-}: DayProps) => {
+}) => {
   const classes = useStyles();
 
   return (
@@ -77,24 +65,24 @@ const Day: React.FunctionComponent<DayProps> = ({
         classes.buttonContainer,
         startOfRange && classes.leftBorderRadius,
         endOfRange && classes.rightBorderRadius,
-        !disabled && highlighted && classes.highlighted,
+        !disabled && highlighted && classes.highlighted
       )}
     >
       <IconButton
         className={combine(
           classes.button,
           !disabled && outlined && classes.outlined,
-          !disabled && filled && classes.filled,
+          !disabled && filled && classes.filled
         )}
         disabled={disabled}
         onClick={onClick}
         onMouseOver={onHover}
       >
         <Typography
-          color={!disabled ? 'textPrimary' : 'textSecondary'}
+          color={!disabled ? "textPrimary" : "textSecondary"}
           className={combine(
             classes.buttonText,
-            !disabled && filled && classes.contrast,
+            !disabled && filled && classes.contrast
           )}
           variant="body2"
         >

@@ -12,19 +12,10 @@ import { format, differenceInCalendarMonths } from "date-fns";
 import ArrowRightAlt from "@material-ui/icons/ArrowRightAlt";
 import Month from "./Month";
 import DefinedRanges from "./DefinedRanges";
-import {
-  // eslint-disable-next-line no-unused-vars
-  DateRange,
-  // eslint-disable-next-line no-unused-vars
-  DefinedRange,
-  // eslint-disable-next-line no-unused-vars
-  Setter,
-  // eslint-disable-next-line no-unused-vars
-  NavigationAction,
-} from "../types";
+
 import { MARKERS } from "./DateRangePicker";
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
   header: {
     padding: "20px 70px",
   },
@@ -38,28 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface MenuProps {
-  dateRange: DateRange;
-  ranges: DefinedRange[];
-  minDate: Date;
-  maxDate: Date;
-  firstMonth: Date;
-  secondMonth: Date;
-  setFirstMonth: Setter<Date>;
-  setSecondMonth: Setter<Date>;
-  setDateRange: Setter<DateRange>;
-  showHeader: boolean;
-  helpers: {
-    inHoverRange: (day: Date) => boolean;
-  };
-  handlers: {
-    onDayClick: (day: Date) => void;
-    onDayHover: (day: Date) => void;
-    onMonthNavigate: (marker: symbol, action: NavigationAction) => void;
-  };
-}
-
-const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
+const Menu = (props) => {
   const classes = useStyles();
 
   const {

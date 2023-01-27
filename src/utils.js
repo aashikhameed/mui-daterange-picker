@@ -18,19 +18,19 @@ import {
 // eslint-disable-next-line no-unused-vars
 import { DateRange } from './types';
 
-export const identity = <T>(x: T) => x;
+export const identity = (x) => x;
 
-export const chunks = <T>(array: ReadonlyArray<T>, size: number): T[][] => (
+export const chunks = (array, size) => (
   Array.from(
     { length: Math.ceil(array.length / size) },
     (_v, i) => array.slice(i * size, i * size + size),
   )
 );
 
-export const combine = (...args: any[]): string => args.filter(identity).join(' ');
+export const combine = (...args) => args.filter(identity).join(' ');
 
 // Date
-export const getDaysInMonth = (date: Date) => {
+export const getDaysInMonth = (date) => {
   const startWeek = startOfWeek(startOfMonth(date));
   const endWeek = endOfWeek(endOfMonth(date));
   const days = [];
@@ -41,32 +41,31 @@ export const getDaysInMonth = (date: Date) => {
   return days;
 };
 
-export const isStartOfRange = ({ startDate }: DateRange, day: Date) => (
-  (startDate && isSameDay(day, startDate)) as boolean
+export const isStartOfRange = ({ startDate }, day) => (
+  (startDate && isSameDay(day, startDate))
 );
 
-export const isEndOfRange = ({ endDate }: DateRange, day: Date) => (
-  (endDate && isSameDay(day, endDate)) as boolean
+export const isEndOfRange = ({ endDate }, day) => (
+  (endDate && isSameDay(day, endDate))
 );
 
-export const inDateRange = ({ startDate, endDate }: DateRange, day: Date) => (
+export const inDateRange = ({ startDate, endDate }, day) => (
   startDate
   && endDate
   && (isWithinRange(day, startDate, endDate)
   || isSameDay(day, startDate)
   || isSameDay(day, endDate))
-) as boolean;
+);
 
-export const isRangeSameDay = ({ startDate, endDate }: DateRange) => {
+export const isRangeSameDay = ({ startDate, endDate }) => {
   if (startDate && endDate) {
     return isSameDay(startDate, endDate);
   }
   return false;
 };
 
-type Falsy = false | null | undefined | 0 | '';
 
-export const parseOptionalDate = (date: Date | string | Falsy, defaultValue: Date) => {
+export const parseOptionalDate = (date, defaultValue) => {
   if (date) {
     const parsed = parse(date);
     if (isValid(parsed)) return parsed;
@@ -74,7 +73,7 @@ export const parseOptionalDate = (date: Date | string | Falsy, defaultValue: Dat
   return defaultValue;
 };
 
-export const getValidatedMonths = (range: DateRange, minDate: Date, maxDate: Date) => {
+export const getValidatedMonths = (range, minDate, maxDate) => {
   const { startDate, endDate } = range;
   if (startDate && endDate) {
     const newStart = max(startDate, minDate);
