@@ -5,9 +5,8 @@
 	"author": "aashik",
 	"license": "MIT",
 	"repository": "aashikhameed/materialui-daterange-picker",
-	"main": "dist/index.js",
-	"module": "dist/index.es.js",
-	"jsnext:main": "dist/index.es.js",
+	"main": "dist/index.ts",
+	"files":["dist/*"],
 	"engines": {
 		"node": ">=8",
 		"npm": ">=5"
