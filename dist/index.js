@@ -15,6 +15,6 @@ Object.defineProperty(exports, "DateRangePickerComponent", {
     return _DateRangePicker.default;
   }
 });
-var _DateRangePickerExporter = _interopRequireDefault(require("./components/DateRangePickerExporter"));
-var _DateRangePicker = _interopRequireDefault(require("./components/DateRangePicker"));
+var _DateRangePickerExporter = _interopRequireDefault(require("./datepicker/components/DateRangePickerExporter"));
+var _DateRangePicker = _interopRequireDefault(require("./datepicker/components/DateRangePicker"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

@@ -1,8 +1,8 @@
-import React from 'react';
-import { DateRangePicker } from '..';
+import React from "react";
+import { DateRangePicker } from "..";
 
 export default {
-  title: 'DateRangePicker',
+  title: "DateRangePicker",
   component: DateRangePicker,
 };
 
@@ -10,5 +10,4 @@ const Template = (args) => <DateRangePicker {...args} />;
 
 export const Primary = Template.bind({});
 
-Primary.args = {
-}
+Primary.args = {};
