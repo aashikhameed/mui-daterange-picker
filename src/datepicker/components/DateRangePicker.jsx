@@ -13,8 +13,6 @@ import {
 
 import { getValidatedMonths, parseOptionalDate } from "../utils";
 
-import { defaultRanges } from "../defaults";
-
 import Menu from "./Menu";
 
 export const MARKERS = {
@@ -27,11 +25,11 @@ const DateRangePicker = (props) => {
 
   const {
     open,
-    onChange,
+    onChange = () => null,
     initialDateRange,
     minDate,
     maxDate,
-    definedRanges = defaultRanges,
+    definedRanges = [],
     showHeader,
   } = props;
 

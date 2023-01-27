@@ -15,10 +15,10 @@ const useStyles = makeStyles((theme) => ({
   },
   headerItem: {
     flex: 1,
-    display: 'flex',
+    display: "flex",
     textAlign: "center",
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center",
   },
   divider: {
     borderLeft: `1px solid #e2e2e2`,
@@ -55,13 +55,13 @@ const Menu = (props) => {
     handlers,
   };
   return (
-    <Paper elevation={5} square>
+    <Paper elevation={3}>
       <Grid container direction="row" wrap="nowrap">
         <Grid>
           <Grid container className={classes.header} alignItems="center">
             <Grid item className={classes.headerItem}>
               <Typography variant="subtitle1">
-                {startDate ? format(startDate, "MMMM dd, yyyy") : "Start Date"}
+                {startDate ? format(startDate, "MMMM DD, YYYY") : "Start Date"}
               </Typography>
             </Grid>
             <Grid item className={classes.headerItem}>
@@ -69,7 +69,7 @@ const Menu = (props) => {
             </Grid>
             <Grid item className={classes.headerItem}>
               <Typography variant="subtitle1">
-                {endDate ? format(endDate, "MMMM dd, yyyy") : "End Date"}
+                {endDate ? format(endDate, "MMMM DD, YYYY") : "End Date"}
               </Typography>
             </Grid>
           </Grid>
@@ -93,14 +93,18 @@ const Menu = (props) => {
             />
           </Grid>
         </Grid>
-        {/* <div className={classes.divider} />
-        <Grid>
-          <DefinedRanges
-            selectedRange={dateRange}
-            ranges={ranges}
-            setRange={setDateRange}
-          />
-        </Grid> */}
+        {ranges.length > 0 ? (
+          <>
+            <div className={classes.divider} />
+            <Grid>
+              <DefinedRanges
+                selectedRange={dateRange}
+                ranges={ranges}
+                setRange={setDateRange}
+              />
+            </Grid>
+          </>
+        ) : null}
       </Grid>
     </Paper>
   );

@@ -103,7 +103,7 @@ const Month = (props) => {
 
                 return (
                   <Day
-                    key={format(day, 'MM-dd-yyyy')}
+                    key={format(day, 'MM-DD-YYYY')}
                     filled={isStart || isEnd}
                     outlined={isToday(day)}
                     highlighted={highlighted && !isRangeOneDay}

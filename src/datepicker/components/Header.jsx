@@ -109,7 +109,7 @@ const Header = ({
           ))}
         </Select>
 
-        {/* <Typography>{format(date, "MMMM yyyy")}</Typography> */}
+        {/* <Typography>{format(date, "MMMM YYYY")}</Typography> */}
       </Grid>
       <Grid item className={classes.iconContainer}>
         <IconButton className={classes.icon} disabled={nextDisabled} onClick={onClickNext}>

@@ -23,22 +23,22 @@ const useStyles = makeStyles((theme) => ({
     height: 36,
     width: 36,
     padding: 0,
+    border: '1px'
   },
   buttonText: {
     lineHeight: 1.6,
   },
   outlined: {
-    border: `1px solid #000`,
+    backgroundImage: `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='100' ry='100' stroke='%23345CECFF' stroke-width='3' stroke-dasharray='50%25%2c 13%25' stroke-dashoffset='33' stroke-linecap='butt'/%3e%3c/svg%3e")`,
   },
   filled: {
     "&:hover": {
-      backgroundColor: '#888',
+      backgroundColor: '#B8BABD',
     },
-    backgroundColor: '#444',
+    backgroundColor: '#B8BABD',
   },
   highlighted: {
-    backgroundColor: '#bbb',
-    border: `1px 0px 1px 0px dotted #b43`,
+    backgroundColor: '#e2e2e2',
   },
   contrast: {
     color: '#54d',
