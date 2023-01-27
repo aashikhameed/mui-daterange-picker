@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import classNames from 'classnames';
-import { makeStyles } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
 import DateRangePicker from './DateRangePicker';
 

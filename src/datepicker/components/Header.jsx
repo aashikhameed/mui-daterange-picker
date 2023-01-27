@@ -2,11 +2,12 @@
 
 import {
   Grid,
-  makeStyles,
   IconButton,
   Select,
   MenuItem,
 } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+
 import React from 'react';
 import {ChevronLeft, ChevronRight} from '@mui/icons-material';
 import {
@@ -69,7 +70,7 @@ const Header = ({
   };
 
   return (
-    <Grid container justify="space-between" alignItems="center">
+    <Grid container justifyContent="space-between" alignItems="center">
       <Grid item className={classes.iconContainer}>
         <IconButton
           className={classes.icon}
@@ -81,6 +82,7 @@ const Header = ({
       </Grid>
       <Grid item>
         <Select
+          variant='standard'
           value={getMonth(date)}
           onChange={handleMonthChange}
           MenuProps={{ disablePortal: true }}
@@ -95,6 +97,7 @@ const Header = ({
 
       <Grid item>
         <Select
+          variant='standard'
           value={getYear(date)}
           onChange={handleYearChange}
           MenuProps={{ disablePortal: true }}
@@ -106,7 +109,7 @@ const Header = ({
           ))}
         </Select>
 
-        {/* <Typography>{format(date, "MMMM YYYY")}</Typography> */}
+        {/* <Typography>{format(date, "MMMM yyyy")}</Typography> */}
       </Grid>
       <Grid item className={classes.iconContainer}>
         <IconButton className={classes.icon} disabled={nextDisabled} onClick={onClickNext}>

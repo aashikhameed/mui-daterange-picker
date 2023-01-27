@@ -3,14 +3,15 @@ import {
   Paper,
   Grid,
   Typography,
-  makeStyles,
 } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+
 import {
   getDate,
   isSameMonth,
   isToday,
   format,
-  isWithinInterval,
+  isWithinRange,
 } from 'date-fns';
 import {
   chunks,
@@ -74,7 +75,7 @@ const Month = (props) => {
           item
           container
           direction="row"
-          justify="space-between"
+          justifyContent="space-between"
           className={classes.weekDaysContainer}
         >
           {WEEK_DAYS.map((day) => (
@@ -88,12 +89,12 @@ const Month = (props) => {
           item
           container
           direction="column"
-          justify="space-between"
+          justifyContent="space-between"
           className={classes.daysContainer}
         >
           {chunks(getDaysInMonth(date), 7).map((week, idx) => (
             // eslint-disable-next-line react/no-array-index-key
-            <Grid key={idx} container direction="row" justify="center">
+            <Grid key={idx} container direction="row" justifyContent="center">
               {week.map((day) => {
                 const isStart = isStartOfRange(dateRange, day);
                 const isEnd = isEndOfRange(dateRange, day);
@@ -102,13 +103,13 @@ const Month = (props) => {
 
                 return (
                   <Day
-                    key={format(day, 'MM-DD-YYYY')}
+                    key={format(day, 'MM-dd-yyyy')}
                     filled={isStart || isEnd}
                     outlined={isToday(day)}
                     highlighted={highlighted && !isRangeOneDay}
                     disabled={
                       !isSameMonth(date, day)
-                      || !isWithinInterval(day, minDate, maxDate)
+                      // || !isWithinRange(day, minDate, maxDate)
                     }
                     startOfRange={isStart && !isRangeOneDay}
                     endOfRange={isEnd && !isRangeOneDay}

@@ -2,7 +2,7 @@ import * as React from "react";
 import {
   addMonths,
   isSameDay,
-  isWithinInterval,
+  isWithinRange,
   isAfter,
   isBefore,
   isSameMonth,
@@ -123,7 +123,7 @@ const DateRangePicker = (props) => {
     !endDate &&
     hoverDay &&
     isAfter(hoverDay, startDate) &&
-    isWithinInterval(day, startDate, hoverDay);
+    isWithinRange(day, startDate, hoverDay);
 
   const helpers = {
     inHoverRange,

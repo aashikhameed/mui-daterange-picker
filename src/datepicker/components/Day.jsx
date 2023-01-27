@@ -4,10 +4,9 @@ import * as React from "react";
 import {
   IconButton,
   Typography,
-  makeStyles,
-  // eslint-disable-next-line no-unused-vars
-  Theme,
 } from "@mui/material";
+import { makeStyles } from '@mui/styles';
+
 import { combine } from "../utils";
 
 const useStyles = makeStyles((theme) => ({
@@ -29,20 +28,20 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: 1.6,
   },
   outlined: {
-    border: `1px solid ${theme.palette.primary.dark}`,
+    border: `1px solid #000`,
   },
   filled: {
     "&:hover": {
-      backgroundColor: theme.palette.primary.dark,
+      backgroundColor: '#888',
     },
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: '#444',
   },
   highlighted: {
-    backgroundColor: theme.palette.action.hover,
-    border: `1px 0px 1px 0px dotted ${theme.palette.primary.dark}`,
+    backgroundColor: '#bbb',
+    border: `1px 0px 1px 0px dotted #b43`,
   },
   contrast: {
-    color: theme.palette.primary.contrastText,
+    color: '#54d',
   },
 }));
 

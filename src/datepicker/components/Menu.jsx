@@ -1,13 +1,7 @@
 import React from "react";
-import {
-  Paper,
-  Grid,
-  Typography,
-  Divider,
-  makeStyles,
-  // eslint-disable-next-line no-unused-vars
-  Theme,
-} from "@mui/material";
+import { Paper, Grid, Typography, Divider } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+
 import { format, differenceInCalendarMonths } from "date-fns";
 import { ArrowRightAlt } from "@mui/icons-material";
 import Month from "./Month";
@@ -17,14 +11,17 @@ import { MARKERS } from "./DateRangePicker";
 
 const useStyles = makeStyles((theme) => ({
   header: {
-    padding: "20px 70px",
+    padding: "10px 70px",
   },
   headerItem: {
     flex: 1,
+    display: 'flex',
     textAlign: "center",
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   divider: {
-    borderLeft: `1px solid ${theme.palette.action.hover}`,
+    borderLeft: `1px solid #e2e2e2`,
     marginBottom: 20,
   },
 }));
@@ -61,30 +58,24 @@ const Menu = (props) => {
     <Paper elevation={5} square>
       <Grid container direction="row" wrap="nowrap">
         <Grid>
-          {showHeader ? (
-            <>
-              <Grid container className={classes.header} alignItems="center">
-                <Grid item className={classes.headerItem}>
-                  <Typography variant="subtitle1">
-                    {startDate
-                      ? format(startDate, "MMMM DD, YYYY")
-                      : "Start Date"}
-                  </Typography>
-                </Grid>
-                <Grid item className={classes.headerItem}>
-                  <ArrowRightAlt color="action" />
-                </Grid>
-                <Grid item className={classes.headerItem}>
-                  <Typography variant="subtitle1">
-                    {endDate ? format(endDate, "MMMM DD, YYYY") : "End Date"}
-                  </Typography>
-                </Grid>
-              </Grid>
-              <Divider />
-            </>
-          ) : null}
+          <Grid container className={classes.header} alignItems="center">
+            <Grid item className={classes.headerItem}>
+              <Typography variant="subtitle1">
+                {startDate ? format(startDate, "MMMM dd, yyyy") : "Start Date"}
+              </Typography>
+            </Grid>
+            <Grid item className={classes.headerItem}>
+              <ArrowRightAlt color="action" />
+            </Grid>
+            <Grid item className={classes.headerItem}>
+              <Typography variant="subtitle1">
+                {endDate ? format(endDate, "MMMM dd, yyyy") : "End Date"}
+              </Typography>
+            </Grid>
+          </Grid>
+          <Divider />
 
-          <Grid container direction="row" justify="center" wrap="nowrap">
+          <Grid container direction="row" justifyContent="center" wrap="nowrap">
             <Month
               {...commonProps}
               value={firstMonth}
@@ -102,14 +93,14 @@ const Menu = (props) => {
             />
           </Grid>
         </Grid>
-        <div className={classes.divider} />
+        {/* <div className={classes.divider} />
         <Grid>
           <DefinedRanges
             selectedRange={dateRange}
             ranges={ranges}
             setRange={setDateRange}
           />
-        </Grid>
+        </Grid> */}
       </Grid>
     </Paper>
   );
