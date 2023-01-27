@@ -7,9 +7,9 @@ import {
   makeStyles,
   // eslint-disable-next-line no-unused-vars
   Theme,
-} from "@material-ui/core";
+} from "@mui/material";
 import { format, differenceInCalendarMonths } from "date-fns";
-import ArrowRightAlt from "@material-ui/icons/ArrowRightAlt";
+import { ArrowRightAlt } from "@mui/icons-material";
 import Month from "./Month";
 import DefinedRanges from "./DefinedRanges";
 

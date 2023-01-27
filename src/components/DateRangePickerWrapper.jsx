@@ -2,12 +2,9 @@
 
 import * as React from 'react';
 import classNames from 'classnames';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/material';
 
 import DateRangePicker from './DateRangePicker';
-
-// eslint-disable-next-line no-unused-vars
-import { DateRange, DefinedRange } from '../types';
 
 const useStyles = makeStyles(() => ({
   dateRangePickerContainer: {

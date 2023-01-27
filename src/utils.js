@@ -6,7 +6,7 @@ import {
   isBefore,
   addDays,
   isSameDay,
-  isWithinRange,
+  isWithinInterval,
   isSameMonth,
   addMonths,
   parse,
@@ -15,8 +15,6 @@ import {
   max,
 } from 'date-fns';
 
-// eslint-disable-next-line no-unused-vars
-import { DateRange } from './types';
 
 export const identity = (x) => x;
 
@@ -52,7 +50,7 @@ export const isEndOfRange = ({ endDate }, day) => (
 export const inDateRange = ({ startDate, endDate }, day) => (
   startDate
   && endDate
-  && (isWithinRange(day, startDate, endDate)
+  && (isWithinInterval(day, startDate, endDate)
   || isSameDay(day, startDate)
   || isSameDay(day, endDate))
 );

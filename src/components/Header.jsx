@@ -6,10 +6,9 @@ import {
   IconButton,
   Select,
   MenuItem,
-} from '@material-ui/core';
+} from '@mui/material';
 import React from 'react';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import ChevronRight from '@material-ui/icons/ChevronRight';
+import {ChevronLeft, ChevronRight} from '@mui/icons-material';
 import {
   setMonth,
   getMonth,

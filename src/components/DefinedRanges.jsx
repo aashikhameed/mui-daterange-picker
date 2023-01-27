@@ -1,9 +1,7 @@
 import React from 'react';
-import { List, ListItem, ListItemText } from '@material-ui/core';
+import { List, ListItem, ListItemText } from '@mui/material';
 import { isSameDay } from 'date-fns';
 
-// eslint-disable-next-line no-unused-vars
-import { DefinedRange, DateRange } from '../types';
 
 const isSameRange = (first, second) => {
   const { startDate: fStart, endDate: fEnd } = first;

@@ -2,31 +2,27 @@
 
 A react date range picker implementation using @material-ui.
 
-<a href='https://www.npmjs.com/package/materialui-daterange-picker'>
-    <img src='https://img.shields.io/npm/v/materialui-daterange-picker.svg' alt='Latest npm version'>
+<a href='https://www.npmjs.com/package/mui-daterange-picker'>
+    <img src='https://img.shields.io/npm/v/mui-daterange-picker.svg' alt='Latest npm version'>
 </a>
 
 ## Preview
 
 ![Screenshot](/screenshot.png?raw=true "Screenshot")
 
-## Live Demo
-
-Check out the project running [here](https://codesandbox.io/s/materialui-daterange-picker-2p3f1?file=/src/App.js)!
-
 ## Usage
 
 ```bash
-npm install materialui-daterange-picker --save
+npm install aashikhameed/mui-daterange-picker --save
 
 # or with yarn
-yarn add materialui-daterange-picker
+yarn add aashikhameed/mui-daterange-picker
 ```
 
 ## Basic example
 ```tsx
 import React from "react";
-import { DateRangePicker, DateRange } from "materialui-daterange-picker";
+import { DateRangePicker, DateRange } from "mui-daterange-picker";
 
 type Props = {}
 
@@ -77,6 +73,6 @@ Name | Type | Required | Default value | Description
 
 ## Made possible by
 
-<a href="https://github.com/jungsoft/materialui-daterange-picker/graphs/contributors">
-  <img src="https://contributors-img.web.app/image?repo=jungsoft/materialui-daterange-picker" />
+<a href="https://github.com/jungsoft/mui-daterange-picker/graphs/contributors">
+  <img src="https://contributors-img.web.app/image?repo=jungsoft/mui-daterange-picker" />
 </a>

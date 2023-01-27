@@ -4,13 +4,13 @@ import {
   Grid,
   Typography,
   makeStyles,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
   getDate,
   isSameMonth,
   isToday,
   format,
-  isWithinRange,
+  isWithinInterval,
 } from 'date-fns';
 import {
   chunks,
@@ -66,8 +66,8 @@ const Month = (props) => {
           setDate={setDate}
           nextDisabled={!forward}
           prevDisabled={!back}
-          onClickPrevious={() => handlers.onMonthNavigate(marker, NavigationAction.Previous)}
-          onClickNext={() => handlers.onMonthNavigate(marker, NavigationAction.Next)}
+          onClickPrevious={() => handlers.onMonthNavigate(marker, -1)}
+          onClickNext={() => handlers.onMonthNavigate(marker, 1)}
         />
 
         <Grid
@@ -108,7 +108,7 @@ const Month = (props) => {
                     highlighted={highlighted && !isRangeOneDay}
                     disabled={
                       !isSameMonth(date, day)
-                      || !isWithinRange(day, minDate, maxDate)
+                      || !isWithinInterval(day, minDate, maxDate)
                     }
                     startOfRange={isStart && !isRangeOneDay}
                     endOfRange={isEnd && !isRangeOneDay}

@@ -7,7 +7,7 @@ import {
   makeStyles,
   // eslint-disable-next-line no-unused-vars
   Theme,
-} from "@material-ui/core";
+} from "@mui/material";
 import { combine } from "../utils";
 
 const useStyles = makeStyles((theme) => ({
