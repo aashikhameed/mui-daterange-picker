@@ -59,7 +59,10 @@ const Menu = props => {
     handlers
   };
   return /*#__PURE__*/_react.default.createElement(_material.Paper, {
-    elevation: 3
+    elevation: 5,
+    sx: {
+      zIndex: 99
+    }
   }, /*#__PURE__*/_react.default.createElement(_material.Grid, {
     container: true,
     direction: "row",
